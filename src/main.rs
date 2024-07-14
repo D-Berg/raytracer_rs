@@ -16,6 +16,9 @@ fn main() {
 
     for j in 0..image_height {
 
+        let lines_remaing = image_width - j;
+        eprint!("\rScanlines remaining: {}", &lines_remaing);
+
         for i in 0..image_width {
 
 
@@ -31,6 +34,9 @@ fn main() {
             println!("{ir} {ig} {ib}");
         }
     }
+
+    eprintln!("\rDone rendering.                       ");
+
     
 
 }
