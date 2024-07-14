@@ -16,8 +16,12 @@ fn main() {
 
     // image 
 
-    let image_width: u32 = 256;
-    let image_height: u32 = 256;
+    let aspect_ratio: f64 = 16.0 / 9.0;
+
+    let image_width: u32 = 800;
+
+    let image_height = (image_width as f64 / aspect_ratio) as u32;
+    dbg!(&image_width, &image_height);
 
 
     // render
