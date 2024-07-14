@@ -3,8 +3,9 @@ use std::ops::{Add, Div, Index, IndexMut, Mul, Sub};
 
 
 pub type Point3 = Vec3;
+pub type Color = Vec3;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Vec3 {
     e: [f64; 3]
 }
@@ -180,6 +181,23 @@ impl Add<Vec3> for &Vec3 {
 
         return rhs;
     }
+}
+
+/// V1 + V2 wich consumes both
+impl Add for Vec3 {
+    type Output = Self;
+
+    fn add(self, rhs: Self) -> Self::Output {
+        
+        let mut res = Vec3::zeros();
+
+        for i in 0..3 {
+            res[i] = self[i] + rhs[i];
+        }
+
+        return res;
+    }
+
 }
 
 
