@@ -7,6 +7,7 @@ pub struct Image {
     pub width: u32,
     pub height: u32,
     aspect_ratio: (u32, u32),
+    pub ratio: f64,
     pub pixel_color: Vec<Vec3>
 }
 
@@ -26,6 +27,7 @@ impl Image {
             width,
             height,
             aspect_ratio,
+            ratio,
             pixel_color: Vec::with_capacity(n_pixes)
 
         }
