@@ -18,6 +18,8 @@ impl Image {
         let ratio = aspect_ratio.0 as f64 / aspect_ratio.1 as f64;
         let height = (width as f64 / ratio) as u32;
 
+        assert!(height > 1);
+
         let n_pixes: usize = (height * width) as usize;
 
         Image {
