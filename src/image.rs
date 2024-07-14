@@ -50,9 +50,9 @@ impl Display for Image {
         let mut g: f64;
         let mut b: f64;
 
-        let mut rbyte: u8;
-        let mut gbyte: u8; 
-        let mut bbyte: u8; 
+        let mut rbyte: u32;
+        let mut gbyte: u32; 
+        let mut bbyte: u32; 
 
 
         for pixel in self.pixel_color.iter() {
@@ -62,9 +62,9 @@ impl Display for Image {
             b = pixel.z();
 
 
-            rbyte = (255.999 * r) as u8;
-            gbyte = (255.999 * g) as u8;
-            bbyte = (255.999 * b) as u8;
+            rbyte = (255.999 * r) as u32;
+            gbyte = (255.999 * g) as u32;
+            bbyte = (255.999 * b) as u32;
 
             // SLOW PART
             write!(f, "{} {} {}\n", rbyte, gbyte, bbyte).expect("Print Image Failed");

@@ -36,7 +36,7 @@ impl Vec3 {
 
     }
 
-    fn dot(&self, other: &Vec3) -> f64 {
+    pub fn dot(&self, other: &Vec3) -> f64 {
         
         let mut res: f64 = 0.0;
 
@@ -62,9 +62,23 @@ impl Vec3 {
 
     }
 
-    fn len(&self) -> Vec3 {
+    pub fn length(&self) -> f64 {
 
-        todo!()
+        return self.length_squared().sqrt();
+
+    }
+
+    fn length_squared(&self) -> f64 {
+
+        return self.dot(&self);
+
+    }
+
+    // unit_vector()
+    pub fn normalize(&self) -> Vec3 {
+
+        return self / self.length();
+
 
     }
 

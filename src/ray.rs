@@ -30,9 +30,39 @@ impl Ray {
 
     pub fn color(&self) -> Color {
 
-        let a: f64 = 0.5 * (self.direction.y()  + 1.0);
+        if self.hit_sphere(Point3::new(0.0, 0.0, -1.0), 0.5) {
+
+            return Color::new(1.0, 0.0, 0.0);
+
+        }
+
+
+
+        let unit_direction = self.direction.normalize();
+
+        let a: f64 = 0.5 * (unit_direction.y()  + 1.0);
 
         (1.0 - a) * Color::ones() + a * Color::new(0.5, 0.7, 1.0)
 
+    }
+
+    // temp code
+    fn hit_sphere(&self, center: Point3, radius: f64) -> bool {
+
+        let oc = center - &self.origin;
+
+        let a = self.direction.dot(&self.direction);
+
+        let b = -2.0 * self.direction.dot(&oc);
+        
+        let c = oc.dot(&oc) - radius * radius;
+
+        let descriminant = b * b - 4.0 * a * c;
+
+        // real solutions
+        let hit: bool = descriminant >= 0.0;
+
+        return hit;
+        
     }
 }

@@ -31,11 +31,12 @@ fn main() {
     
     let focal_length: f64 = 1.0;
     let viewport_height: f64 = 2.0;
-    let viewport_width: f64 = viewport_height * image.ratio;
+    let viewport_width: f64 = viewport_height 
+        * (image_width as f64 / image_height as f64);
     let camera_center: Point3 = Point3::zeros();
 
     let viewport_u = Vec3::new(viewport_width, 0.0, 0.0);
-    let viewport_v = Vec3::new(0.0, -viewport_width, 0.0);
+    let viewport_v = Vec3::new(0.0, -viewport_height, 0.0);
 
     let pixel_delta_u = &viewport_u / (image_width as f64);
     let pixel_delta_v = &viewport_v / (image_height as f64);
