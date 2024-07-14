@@ -3,8 +3,12 @@
 mod vec3;
 mod color;
 mod ray;
+mod image;
+
+use std::io::{stdout, Write};
 
 use color::Color;
+use image::Image;
 
 use crate::vec3::Vec3;
 use crate::color::print_color;
@@ -15,22 +19,16 @@ fn main() {
 
 
     // image 
+    let mut image = Image::new(800, (16, 9));
 
-    let aspect_ratio: f64 = 16.0 / 9.0;
+    let image_width = image.width;
+    let image_height = image.height;
 
-    let image_width: u32 = 800;
-
-    let image_height = (image_width as f64 / aspect_ratio) as u32;
-    dbg!(&image_width, &image_height);
-
+    dbg!(&image_height, &image_width);
+    
 
     // render
-
-    println!("P3");
-    println!("{image_width} {image_height}");
-    println!("255");
-
-    for j in 0..image_height {
+    for j in 0..image_width {
 
         let lines_remaing = image_width - j;
         eprint!("\rScanlines remaining: {}", &lines_remaing);
@@ -43,15 +41,18 @@ fn main() {
                 0.0
             );
 
+            image.pixel_color.push(pixel_color);
 
-            print_color(&pixel_color);
+            //print_color(&mut stdout, &pixel_color);
 
         }
     }
 
+
     eprintln!("\rDone rendering.                       ");
 
     
+    println!("{}", &image);
 
 }
 
