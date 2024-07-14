@@ -1,17 +1,13 @@
 
 #![allow(dead_code)]
 mod vec3;
-mod color;
 mod ray;
 mod image;
 
-use std::io::{stdout, Write};
 
-use color::Color;
 use image::Image;
 
 use crate::vec3::Vec3;
-use crate::color::print_color;
 
 
 
@@ -35,7 +31,7 @@ fn main() {
 
         for i in 0..image_width {
 
-            let pixel_color = Color::new(
+            let pixel_color = Vec3::new(
                 (i as f64) / ((image_width - 1) as f64),
                 (j as f64) / ((image_height - 1) as f64), 
                 0.0

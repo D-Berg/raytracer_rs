@@ -1,13 +1,13 @@
-use std::fmt::{write, Display};
+use std::fmt::Display;
 
-use crate::color::Color;
+use crate::vec3::Vec3;
 
 
 pub struct Image {
     pub width: u32,
     pub height: u32,
     aspect_ratio: (u32, u32),
-    pub pixel_color: Vec<Color>
+    pub pixel_color: Vec<Vec3>
 }
 
 
