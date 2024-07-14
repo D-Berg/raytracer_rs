@@ -24,7 +24,7 @@ fn main() {
     
 
     // render
-    for j in 0..image_width {
+    for j in 0..image_height {
 
         let lines_remaing = image_width - j;
         eprint!("\rScanlines remaining: {}", &lines_remaing);

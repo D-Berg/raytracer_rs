@@ -40,7 +40,7 @@ impl Display for Image {
 
         write!(f,"P3\n").expect("Print Image Failed");
         write!(f, "{} {}\n", self.width, self.height).expect("Print Image Failed");
-        write!(f, "255").expect("Print Image Failed");
+        write!(f, "255\n").expect("Print Image Failed");
 
         let mut r: f64;
         let mut g: f64;
@@ -63,7 +63,7 @@ impl Display for Image {
             bbyte = (255.999 * b) as u32;
 
             // SLOW PART
-            writeln!(f, "{} {} {}", rbyte, gbyte, bbyte).expect("Print Image Failed");
+            write!(f, "{} {} {}\n", rbyte, gbyte, bbyte).expect("Print Image Failed");
 
         }
 
