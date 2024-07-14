@@ -30,7 +30,9 @@ impl Ray {
 
     pub fn color(&self) -> Color {
 
-        Color::zeros()
+        let a: f64 = 0.5 * (self.direction.y()  + 1.0);
+
+        (1.0 - a) * Color::ones() + a * Color::new(0.5, 0.7, 1.0)
 
     }
 }
