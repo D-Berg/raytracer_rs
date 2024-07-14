@@ -43,8 +43,6 @@ fn main() {
 
             image.pixel_color.push(pixel_color);
 
-            //print_color(&mut stdout, &pixel_color);
-
         }
     }
 
@@ -52,6 +50,7 @@ fn main() {
     eprintln!("\rDone rendering.                       ");
 
     
+    // Print image
     println!("{}", &image);
 
 }
