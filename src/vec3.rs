@@ -89,6 +89,17 @@ impl Vec3 {
 }
 
 // Operator overloading for Vec3
+//Note that (for any binary operator @):
+//
+// - &A @ &A produces a new Array
+// - B @ A consumes B, updates it with the result, and returns it
+// - B @ &A consumes B, updates it with the result, and returns it
+// - C @= &A performs an arithmetic operation in place
+//
+// - &A @ K or K @ &A which produces a new Array
+// - B @ K or K @ B which consumes B, updates it with the result and returns it
+// - C @= K which performs an arithmetic operation in place
+
 impl Index<usize> for Vec3 {
     type Output = f64;
     fn index<'a>(&'a self, i: usize) -> &'a f64 {
@@ -102,7 +113,7 @@ impl IndexMut<usize> for Vec3 {
     }
 }
 
-    
+/// &V + f64 Produces new Vec3
 impl Add<f64> for &Vec3 {
     type Output = Vec3;
 
@@ -122,6 +133,7 @@ impl Add<f64> for &Vec3 {
 
 }
  
+/// &V1 + &V2 produces new Vec3
 impl Add for &Vec3 {
     type Output = Vec3;
 
@@ -142,6 +154,37 @@ impl Add for &Vec3 {
 
 }
 
+/// V1 + &V2 which consumes V1, updates it and returns it.
+impl Add<&Vec3> for Vec3 {
+    type Output = Vec3;
+
+    fn add(mut self, rhs: &Vec3) -> Self::Output {
+
+        for i in 0..3 {
+            self[i] += rhs[i];
+        }
+
+        return self;
+    }
+}
+
+/// &V1 + V2 which consumes V2, updates it and returns it.
+impl Add<Vec3> for &Vec3 {
+    type Output = Vec3;
+
+    fn add(self, mut rhs: Vec3) -> Self::Output {
+
+        for i in 0..3 {
+            rhs[i] += self[i];
+        }
+
+        return rhs;
+    }
+}
+
+
+
+// SUB Vec scalar ---------------
 impl Sub<f64> for &Vec3 {
     type Output = Vec3;
 
@@ -161,6 +204,41 @@ impl Sub<f64> for &Vec3 {
 
 }
 
+
+// B - A consumes B, updates it with the result, and returns it
+impl Sub for Vec3 {
+    type Output = Self;
+
+    fn sub(mut self, rhs: Self) -> Self::Output {
+
+        for i in 0..3 {
+
+            self[i] -= rhs[i];
+
+        }
+        
+        self
+    }
+    
+}
+
+// B @ &A which consumes B, updates it with the result, and returns it
+impl Sub<&Vec3> for Vec3{
+    type Output = Self;
+
+    fn sub(mut self, rhs: &Vec3) -> Self::Output {
+        
+        for i in 0..3 {
+            self[i] -= rhs[i];
+        }
+
+        self
+
+    }
+    
+}
+
+/// &A @ &A produces a new Array
 impl Sub for &Vec3 {
     type Output = Vec3;
 
@@ -181,6 +259,10 @@ impl Sub for &Vec3 {
 
 }
 
+// MUL -----------
+
+
+/// &A * K which produces a new vec3
 impl Mul<f64> for &Vec3 {
     type Output = Vec3;
 
@@ -198,6 +280,62 @@ impl Mul<f64> for &Vec3 {
         
     }
 
+}
+
+/// K * &A which produces a new array
+impl Mul<&Vec3> for f64 {
+    type Output = Vec3;
+    
+    fn mul(self, rhs: &Vec3) -> Self::Output {
+
+        let mut res = Vec3::zeros();
+
+        for i in 0..3 {
+
+            res[i] = self * rhs[i];
+
+        }
+
+
+        return res;
+        
+    }
+}
+
+/// A * K which consumes A and updates it with the result
+impl Mul<f64> for Vec3 {
+    type Output = Self;
+
+    fn mul(mut self, rhs: f64) -> Self::Output {
+
+        for i in 0..3 {
+
+            self[i] *= rhs;
+
+        }
+
+        return self;
+        
+    }
+    
+}
+
+/// K * V which consumes V and updates it with the result
+impl Mul<Vec3> for f64 {
+    type Output = Vec3;
+
+    fn mul(self, mut rhs: Vec3) -> Self::Output {
+
+        for i in 0..3 {
+
+            rhs[i] *= self;
+
+        }
+
+        return rhs;
+        
+    }
+    
 }
 
 
@@ -218,6 +356,25 @@ impl Mul for &Vec3 {
         return res;
 
     }
+}
+
+impl Div<f64> for &Vec3 {
+    type Output = Vec3;
+
+    fn div(self, rhs: f64) -> Self::Output {
+
+        let mut res = Vec3::zeros();
+
+        for i in 0..3 {
+
+            res[i] = self[i] / rhs;
+
+        }
+        
+        return res;
+        
+    }
+
 }
 
 impl Div for &Vec3 {
@@ -355,3 +512,6 @@ fn vec_div_vec() {
 
 
 }
+
+
+// TODO Implement more tests for operations
