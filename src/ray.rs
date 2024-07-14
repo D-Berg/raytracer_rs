@@ -1,5 +1,5 @@
 
-use crate::vec3::{Vec3, Point3};
+use crate::vec3::{Color, Point3, Vec3};
 
 /// P(t) = A + t*b
 /// P is a 3D position along a line.
@@ -25,6 +25,12 @@ impl Ray {
     pub fn at(&self, t: f64) -> Point3 {
 
         return &self.origin + &(&self.direction * t);
+
+    }
+
+    pub fn color(&self) -> Color {
+
+        Color::zeros()
 
     }
 }
