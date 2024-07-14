@@ -181,6 +181,25 @@ impl Sub for &Vec3 {
 
 }
 
+impl Mul<f64> for &Vec3 {
+    type Output = Vec3;
+
+    fn mul(self, rhs: f64) -> Self::Output {
+
+        let mut res = Vec3::zeros();
+
+        for i in 0..3 {
+
+            res[i] = self[i] * rhs;
+
+        }
+        
+        return res;
+        
+    }
+
+}
+
 
 impl Mul for &Vec3 {
     type Output = Vec3;
