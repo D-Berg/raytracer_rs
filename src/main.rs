@@ -48,7 +48,8 @@ fn main() {
         - &viewport_u / 2.0
         - &viewport_v / 2.0;
 
-    let pixel00_loc = &viewport_upper_left + 0.5 * (&pixel_delta_u + &pixel_delta_v);
+    let pixel00_loc = &viewport_upper_left + 0.5 
+        * (&pixel_delta_u + &pixel_delta_v);
 
 
     // render---------------------
