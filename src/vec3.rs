@@ -2,6 +2,7 @@ use std::{ops::{Add, Div, Index, IndexMut, Mul, Sub}, process::Output};
 
 
 
+pub type Point3 = Vec3;
 
 #[derive(Debug)]
 pub struct Vec3 {

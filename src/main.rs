@@ -2,13 +2,13 @@
 #![allow(dead_code)]
 mod vec3;
 mod color;
+mod ray;
 
 use color::Color;
 
 use crate::vec3::Vec3;
 use crate::color::print_color;
 
-type Point3 = Vec3;
 
 
 fn main() {
