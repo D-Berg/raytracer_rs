@@ -2,4 +2,4 @@
 
 [Tutorial](https://raytracing.github.io/books/RayTracingInOneWeekend.html#outputanimage/theppmimageformat)
 
-![image](./image.ppm)
+![image](./image.png)
