@@ -30,13 +30,19 @@ impl Ray {
 
     pub fn color(&self) -> Color {
 
-        if self.hit_sphere(Point3::new(0.0, 0.0, -1.0), 0.5) {
+        let t = self.hit_sphere(Point3::new(0.0, 0.0, -1.0), 0.5);
 
-            return Color::new(1.0, 0.0, 0.0);
+
+        if t > 0.0 {
+
+            let surface_normal = (self.at(t) - Vec3::new(0.0, 0.0, -1.0))
+                .normalize();
+
+            let clr: Color = 0.5 * (surface_normal + 1.0);
+
+            return clr;
 
         }
-
-
 
         let unit_direction = self.direction.normalize();
 
@@ -47,7 +53,7 @@ impl Ray {
     }
 
     // temp code
-    fn hit_sphere(&self, center: Point3, radius: f64) -> bool {
+    fn hit_sphere(&self, center: Point3, radius: f64) -> f64 {
 
         let oc = center - &self.origin;
 
@@ -57,12 +63,14 @@ impl Ray {
         
         let c = oc.dot(&oc) - radius * radius;
 
-        let descriminant = b * b - 4.0 * a * c;
+        let discriminant = b * b - 4.0 * a * c;
 
-        // real solutions
-        let hit: bool = descriminant >= 0.0;
+        if discriminant < 0.0 {
+            return -1.0;
+        } else {
+            return (-b - discriminant.sqrt()) / (2.0 * a);
+        }
 
-        return hit;
         
     }
 }

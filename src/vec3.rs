@@ -74,7 +74,10 @@ impl Vec3 {
 
     }
 
-    // unit_vector()
+    /// Unit vector of vector V is the with the same initial
+    /// and direction as V but with length of 1.
+    /// Normalization of a vector. 
+    /// This is the process of identifying the unit vector for a given vector A.
     pub fn normalize(&self) -> Vec3 {
 
         return self / self.length();
@@ -128,7 +131,7 @@ impl IndexMut<usize> for Vec3 {
     }
 }
 
-/// &V + f64 Produces new Vec3
+/// &V + K Produces new Vec3
 impl Add<f64> for &Vec3 {
     type Output = Vec3;
 
@@ -145,6 +148,23 @@ impl Add<f64> for &Vec3 {
         return res;
         
     }
+
+}
+
+
+/// V + K consume V, update, return it.
+impl Add<f64> for Vec3 {
+    type Output = Self;
+    
+    fn add(mut self, rhs: f64) -> Self::Output {
+        
+        for i in 0..3 {
+            self[i] += rhs;
+        }
+        
+        return self;
+    }
+
 
 }
  
