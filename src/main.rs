@@ -80,6 +80,7 @@ fn main() {
 
     
     // Print image
+    eprintln!("Outputting image...");
     println!("{}", &image);
 
 }

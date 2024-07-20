@@ -68,7 +68,7 @@ impl Vec3 {
 
     }
 
-    fn length_squared(&self) -> f64 {
+    pub fn length_squared(&self) -> f64 {
 
         return self.dot(&self);
 

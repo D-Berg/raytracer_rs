@@ -59,16 +59,16 @@ impl Ray {
 
         let a = self.direction.dot(&self.direction);
 
-        let b = -2.0 * self.direction.dot(&oc);
+        let h = self.direction.dot(&oc);
         
-        let c = oc.dot(&oc) - radius * radius;
+        let c = oc.length_squared() - radius * radius;
 
-        let discriminant = b * b - 4.0 * a * c;
+        let discriminant = h * h - a * c;
 
         if discriminant < 0.0 {
             return -1.0;
         } else {
-            return (-b - discriminant.sqrt()) / (2.0 * a);
+            return (h - discriminant.sqrt()) / a;
         }
 
         
